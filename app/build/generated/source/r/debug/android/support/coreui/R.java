@@ -75,7 +75,7 @@ public final class R {
     public static final class id {
         public static final int action_container = 0x7f08000d;
         public static final int action_divider = 0x7f08000f;
-        public static final int action_image = 0x7f080011;
+        public static final int action_image = 0x7f080010;
         public static final int action_text = 0x7f080017;
         public static final int actions = 0x7f080018;
         public static final int async = 0x7f08001e;
@@ -119,7 +119,7 @@ public final class R {
         public static final int notification_template_part_time = 0x7f0a0022;
     }
     public static final class string {
-        public static final int status_bar_notification_info_overflow = 0x7f0d0023;
+        public static final int status_bar_notification_info_overflow = 0x7f0d0024;
     }
     public static final class style {
         public static final int TextAppearance_Compat_Notification = 0x7f0e00e9;

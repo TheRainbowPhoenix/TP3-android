@@ -93,12 +93,16 @@ public class CountryActivity extends Activity {
                 onBackPressed();
                 //NavUtils.navigateUpFromSameTask(this);
                 return true;
+            case R.id.action_save:
+                onBackPressed();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
         getMenuInflater().inflate(R.menu.actionbar, menu);
         return true;
     }
