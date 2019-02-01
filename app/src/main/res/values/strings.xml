@@ -1,3 +1,4 @@
 <resources>
-    <string name="title_activity_country">CountryActivity</string>
+    <string name="title_activity_country">Edit Country</string>
+    <string name="main">Countries</string>
 </resources>
