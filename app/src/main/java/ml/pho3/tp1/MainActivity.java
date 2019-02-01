@@ -8,11 +8,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import android.view.View;
 
 import static android.widget.AdapterView.*;
 
 public class MainActivity extends Activity {
+
+    private static HashMap<String, Country> countries = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +27,7 @@ public class MainActivity extends Activity {
 
         final ArrayList<String> items = new ArrayList<String>();
         for (String c : CountryList.getNameArray()) {
+            if(!countries.containsKey(c)) countries.put(c,CountryList.getCountry(c));
             items.add(c);
             /*Toast toast =Toast.makeText(getApplicationContext(), c, Toast.LENGTH_SHORT);
             toast.show();*/
@@ -36,7 +41,7 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 final String item = (String) parent.getItemAtPosition(position);
-                Country c = CountryList.getCountry(item);
+                Country c = countries.get(item);
                 Intent i = new Intent(getApplicationContext(), CountryActivity.class);
                 i.putExtra("Position", position);
                 i.putExtra("Name", item);
@@ -46,7 +51,7 @@ public class MainActivity extends Activity {
                 bundle.putString("Name", item);
 
                 i.putExtras(bundle);
-                startActivity(i);
+                startActivityForResult(i, 1);
 
                 /*view.animate().setDuration(2000).alpha(0).withEndAction(new Runnable() {
                     @Override
@@ -63,6 +68,18 @@ public class MainActivity extends Activity {
 
         this.overridePendingTransition(R.anim.anim_slide_in_right,
                 R.anim.anim_slide_out_right);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK) {
+                String name = data.getStringExtra("Name");
+                Country c = (Country) data.getExtras().getSerializable("Country");
+                countries.put(name, c);
+            }
+        }
     }
 
 }
