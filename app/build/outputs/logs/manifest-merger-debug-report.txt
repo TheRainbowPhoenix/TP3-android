@@ -1,0 +1,117 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:2:1-29:12
+INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:2:1-29:12
+INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:2:1-29:12
+INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:2:1-29:12
+MERGED from [com.android.support:appcompat-v7:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/6afa77b37e4f77d8a25cae5462d3cef7/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/52da91927d563fee5920be009bd912e3/AndroidManifest.xml:2:1-11:12
+MERGED from [com.android.support:support-fragment:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/95ef22af11e4fa3e7eb631ace3f3392c/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/d4c0cfb89b615afaedbe703617346fc8/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/ee15b1f9250144f2421df7c7b225e566/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/ba0305d69da3657587be3f889ba87225/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/4a8ba4e621d4b68e92bafaa54eef75ef/AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/9d973f743ab7070b69adac277cdc9650/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/57fdfaa6f6d64da707aa7c428e4a96d1/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/120b03cb4f3a25f00d5caadb878a9963/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/84217484f91317eba7c344e1a4dcbb28/AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/4f459eb2e7a6fe396b4e02fbf3831a03/AndroidManifest.xml:17:1-22:12
+INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:2:1-29:12
+INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:2:1-29:12
+INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:2:1-29:12
+	package
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:3:5-26
+		INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml
+		INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:2:1-29:12
+		INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:2:1-29:12
+		INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:5:5-27:19
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/52da91927d563fee5920be009bd912e3/AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/52da91927d563fee5920be009bd912e3/AndroidManifest.xml:9:5-20
+	android:supportsRtl
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:10:9-35
+	android:label
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:8:9-41
+	android:roundIcon
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:9:9-54
+	android:icon
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:7:9-43
+	android:allowBackup
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:6:9-35
+	android:theme
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:11:9-40
+activity#ml.pho3.tp1.MainActivity
+ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:12:9-18:20
+	android:name
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:12:19-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:13:13-17:29
+action#android.intent.action.MAIN
+ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:14:17-69
+	android:name
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:14:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:16:17-77
+	android:name
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:16:27-74
+activity#ml.pho3.tp1.CountryActivity
+ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:19:9-26:60
+	android:parentActivityName
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:22:13-55
+	android:label
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:21:13-59
+	android:name
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:20:13-44
+meta-data#android.support.PARENT_ACTIVITY
+ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:24:13-26:49
+	android:value
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:26:17-46
+	android:name
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml:25:17-63
+uses-sdk
+INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml
+INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml
+MERGED from [com.android.support:appcompat-v7:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/6afa77b37e4f77d8a25cae5462d3cef7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/6afa77b37e4f77d8a25cae5462d3cef7/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/52da91927d563fee5920be009bd912e3/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.1.3] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/constraint-layout-1.1.3.aar/52da91927d563fee5920be009bd912e3/AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support:support-fragment:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/95ef22af11e4fa3e7eb631ace3f3392c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/support-fragment-27.1.1.aar/95ef22af11e4fa3e7eb631ace3f3392c/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/d4c0cfb89b615afaedbe703617346fc8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/animated-vector-drawable-27.1.1.aar/d4c0cfb89b615afaedbe703617346fc8/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/ee15b1f9250144f2421df7c7b225e566/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/support-core-ui-27.1.1.aar/ee15b1f9250144f2421df7c7b225e566/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/ba0305d69da3657587be3f889ba87225/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/support-core-utils-27.1.1.aar/ba0305d69da3657587be3f889ba87225/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/4a8ba4e621d4b68e92bafaa54eef75ef/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/support-vector-drawable-27.1.1.aar/4a8ba4e621d4b68e92bafaa54eef75ef/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/9d973f743ab7070b69adac277cdc9650/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/support-compat-27.1.1.aar/9d973f743ab7070b69adac277cdc9650/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/57fdfaa6f6d64da707aa7c428e4a96d1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/livedata-core-1.1.0.aar/57fdfaa6f6d64da707aa7c428e4a96d1/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/120b03cb4f3a25f00d5caadb878a9963/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/viewmodel-1.1.0.aar/120b03cb4f3a25f00d5caadb878a9963/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/84217484f91317eba7c344e1a4dcbb28/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/84217484f91317eba7c344e1a4dcbb28/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/4f459eb2e7a6fe396b4e02fbf3831a03/AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] /home/nas02a/etudiants/inf/uapv1701795/.gradle/caches/transforms-1/files-1.1/runtime-1.1.0.aar/4f459eb2e7a6fe396b4e02fbf3831a03/AndroidManifest.xml:20:5-44
+INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml
+INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml
+		INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml
+		ADDED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml
+		INJECTED from /home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/src/main/AndroidManifest.xml

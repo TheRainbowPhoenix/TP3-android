@@ -1,0 +1,4 @@
+#Fri Feb 01 14:13:31 CET 2019
+base.0=/home/nas02a/etudiants/inf/uapv1701795/AndroidStudioProjects/TP1/app/build/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex

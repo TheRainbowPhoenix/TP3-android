@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryDark">#22272B</color>
+    <color name="colorPrimary">#273339</color>
+    <color name="primary_dark_material_dark">#273339</color>
+    <color name="colorAccent">#009688</color>
+    <color name="colorBackground">#1f292f</color>
+    <color name="textColorPrimaryInverse">#f0ffffff</color>
+    <color name="navigationBarColor">#22272b</color>
+    <color name="colorForeground">#22272b</color>
+    <color name="textColorPrimary">#deffffff</color>
+    <color name="textColorSecondary">#8affffff</color>
+    <color name="statusBarColor">#22272B</color>
+    <color name="switchTrackNormal">#B9B9B9</color>
+</resources>
