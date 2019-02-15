@@ -1,4 +1,4 @@
-package ml.pho3.tp1;
+package ml.pho3.tp3;
 
 import org.junit.Test;
 
