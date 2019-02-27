@@ -21,4 +21,42 @@
    <style name="CustomButtonStyle"></style>
    <!-- Custom Style defined for the buttons. -->
 
+    <style name="DropDownListViewStyle" parent="@android:style/Widget.Holo.ListView.DropDown">
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:dividerHeight">0.0dip</item>
+    </style>
+
+    <style name="Weather.ActionBar" parent="@android:style/Widget.DeviceDefault.Light.ActionBar.Solid">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:displayOptions">none</item>
+    </style>
+
+    <style name="NoCloseButton" parent="@android:style/Widget.ActionButton.CloseMode">
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="Theme.Weather.Detail" parent="@style/AppTheme">
+        <item name="android:windowBackground">@drawable/gradient_bg</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListViewStyle</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowDisablePreview">false</item>
+        <item name="android:actionBarStyle">@style/Weather.ActionBar</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:actionModeCloseButtonStyle">@style/NoCloseButton</item>
+        <item name="android:actionMenuTextColor">@color/textColorPrimary</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Weather.TextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:fontFamily">@string/font_roboto_condensed</item>
+    </style>
+
+    <style name="Weather.TextAppearance.Temp" parent="@style/Weather.TextAppearance">
+        <item name="android:fontFamily">@string/font_clock_2017L</item>
+    </style>
+
+    <string name="font_clock_2017L">clock2017L</string>
+    <string name="font_roboto_condensed">sec-roboto-condensed</string>
 </resources>

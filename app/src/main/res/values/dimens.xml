@@ -5,4 +5,6 @@
 <dimen name="activity_horizontal_margin">16.0dip</dimen>
 <dimen name="activity_vertical_margin">16.0dip</dimen>
     <dimen name="big_text">32dip</dimen>
+    <dimen name="iconListSize">24dip</dimen>
+    <dimen name="smallTextSize">16dip</dimen>
 </resources>

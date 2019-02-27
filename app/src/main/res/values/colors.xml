@@ -12,4 +12,5 @@
     <color name="textColorSecondary">#8affffff</color>
     <color name="statusBarColor">#22272B</color>
     <color name="switchTrackNormal">#B9B9B9</color>
+    <color name="BotBG">#4dbccf</color>
 </resources>

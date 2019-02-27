@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:orientation="horizontal"
+    tools:layout_editor_absoluteY="81dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="8dp"
+        tools:layout_editor_absoluteX="8dp"
+        android:layout_weight="1"
+        android:paddingLeft="8dip">
+
+        <TextView
+            android:id="@+id/cName"
+            android:layout_width="match_parent"
+            android:layout_height="34dip"
+            android:text="TextView"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageViewRow"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="32dp"
+            app:layout_constraintVertical_bias="1.0"
+            android:layout_weight="1"
+            android:elevation="1dp" />
+
+        <TextView
+            android:id="@+id/cCountry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cName"
+            tools:layout_editor_absoluteX="131dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingRight="4dip"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0°"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp"
+            android:layout_weight="1"
+            android:textAlignment="textEnd"
+            android:paddingLeft="8dip"
+            android:paddingRight="8dip" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/imageViewRow"
+            app:srcCompat="@drawable/weather_sunny"
+            tools:layout_editor_absoluteX="0dp"
+            android:layout_weight="0"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:elevation="1dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

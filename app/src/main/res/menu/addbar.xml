@@ -3,11 +3,11 @@
 
     <!-- "Mark Favorite", should appear as action button if possible -->
     <item
-        android:id="@+id/action_save"
-        android:title="@string/save"
-        android:icon="@drawable/ic_save_white"
+        android:id="@+id/action_add"
         android:checked="true"
-        android:showAsAction="ifRoom"  />
+        android:icon="@drawable/ic_action_add"
+        android:showAsAction="ifRoom"
+        android:title="@string/reload" />
 
     <!-- Settings, should always be in the overflow -->
 
