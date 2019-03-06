@@ -168,6 +168,7 @@ public class CityActivity extends Activity {
 
         AlertDialog alertDialog;
         private Context c;
+        private boolean hasFailed = false;
 
         public Updatable(Context c) {
             this.c = c;
@@ -196,27 +197,44 @@ public class CityActivity extends Activity {
             try {
                 urlConnection = (HttpURLConnection) url.openConnection();
             } catch (IOException e) {
-                e.printStackTrace();
+                alertDialog.setTitle("Communication error");
+                alertDialog.setMessage("Application cannot connect");
+
                 Log.e("async", "No internet");
+
+                hasFailed = true;
+
+                e.printStackTrace();
             }
 
             try {
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
 
-                java.util.Scanner s = new java.util.Scanner(in).useDelimiter("\\A");
+                /*java.util.Scanner s = new java.util.Scanner(in).useDelimiter("\\A");
                 if (s.hasNext()) Log.e("out : ", s.next());
+                else Log.w("out : ", "NULL");*/
 
-                Log.w("out : ", "NULL");
+                JSONResponseHandler jr = new JSONResponseHandler(city);
+                jr.readJsonStream(in);
 
-                //TODO: Proceed
             } catch (UnknownHostException e) {
 
                 alertDialog.setTitle("Communication error");
                 alertDialog.setMessage("No internet ><'");
 
                 Log.e("async", "No internet");
+
+                hasFailed = true;
                 return null;
             } catch (IOException e) {
+
+                alertDialog.setTitle("Communication error");
+                alertDialog.setMessage("IO Exception : Host is unreachable");
+
+                Log.e("async", "No internet");
+
+                hasFailed = true;
+
                 e.printStackTrace();
             } finally {
                 urlConnection.disconnect();
@@ -228,7 +246,7 @@ public class CityActivity extends Activity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            alertDialog.show();
+            if(hasFailed) alertDialog.show();
         }
 
     }

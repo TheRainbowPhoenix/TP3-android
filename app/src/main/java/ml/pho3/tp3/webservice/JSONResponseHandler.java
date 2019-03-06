@@ -71,7 +71,15 @@ public class JSONResponseHandler {
         reader.beginArray();
         int nb = 0; // only consider the first element of the array
         while (reader.hasNext() && nb==0) {
-            // TODO: complete
+            reader.beginObject();
+            String name = reader.nextName();
+            if(name.equals("icon")){
+                city.setIcon(reader.nextString());
+            } else {
+                reader.skipValue();
+            }
+            while(reader.hasNext()) reader.skipValue();
+            reader.endObject();
             nb++;
         }
         reader.endArray();
@@ -84,6 +92,7 @@ public class JSONResponseHandler {
             if (name.equals("temp")) {
                 city.setTemperature(kelvin2celsius(reader.nextDouble()));
             } else if (name.equals("humidity")) {
+                city.setHumidity(reader.nextString());
                 // TODO: complete
             } else {
                reader.skipValue();
@@ -97,6 +106,7 @@ public class JSONResponseHandler {
         while (reader.hasNext()) {
             String name = reader.nextName();
             if (name.equals("speed")) {
+                city.setWindSpeed(reader.nextString());
                 // TODO: complete
             } else if (name.equals("deg")) {
                 city.setWindDirection(deg2compass(reader.nextInt()));
@@ -109,6 +119,7 @@ public class JSONResponseHandler {
 
     private void readClouds(JsonReader reader) throws IOException {
         reader.beginObject();
+        while(reader.hasNext()) reader.skipValue();
         // TODO: complete
         reader.endObject();
     }
