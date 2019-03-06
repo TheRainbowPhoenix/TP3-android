@@ -161,7 +161,6 @@ public class CityActivity extends Activity {
     private void doReload() {
         Log.d("async", "Reloading");
         new Updatable(this).execute("");
-        updateView();
     }
 
     private class Updatable extends AsyncTask<String, Void, String> {
@@ -229,7 +228,7 @@ public class CityActivity extends Activity {
             } catch (IOException e) {
 
                 alertDialog.setTitle("Communication error");
-                alertDialog.setMessage("IO Exception : Host is unreachable");
+                alertDialog.setMessage("IO Exception : Host replied wrongly");
 
                 Log.e("async", "No internet");
 
@@ -247,6 +246,9 @@ public class CityActivity extends Activity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             if(hasFailed) alertDialog.show();
+            else {
+                updateView();
+            }
         }
 
     }
