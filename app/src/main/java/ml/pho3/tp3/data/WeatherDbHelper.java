@@ -213,8 +213,12 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
 
     public City getCity(int id) {
         City city;
-        city = null;
-	// TODO
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from "+TABLE_NAME+" where "+_ID+" = '"
+                + id + "'", null);
+
+        city = cursorToCity(cursor);
 	return city;
     }
 }

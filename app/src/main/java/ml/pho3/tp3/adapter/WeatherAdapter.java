@@ -33,7 +33,15 @@ public class WeatherAdapter extends CursorAdapter {
         String name = cursor.getString(cursor.getColumnIndexOrThrow(WeatherDbHelper.COLUMN_CITY_NAME));
         String count = cursor.getString(cursor.getColumnIndexOrThrow(WeatherDbHelper.COLUMN_COUNTRY));
         String temp = cursor.getString(cursor.getColumnIndexOrThrow(WeatherDbHelper.COLUMN_TEMPERATURE));
-        bookCover.setImageResource(R.drawable.weather_sunny);
+        String ico = cursor.getString(cursor.getColumnIndexOrThrow(WeatherDbHelper.COLUMN_ICON));
+
+        if(ico == null) ico = "50d";
+
+        ico = IconDefines.getIconName(ico);
+
+        int id = context.getResources().getIdentifier(ico, "drawable", context.getPackageName());
+
+        bookCover.setImageResource(id);
 
         Name.setText(name);
         Country.setText(count);

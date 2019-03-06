@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -64,6 +65,19 @@ public class MainActivity extends Activity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1:
+                if(resultCode==Activity.RESULT_OK) {
+                    Log.w("result", "> city");
+                }
+                break;
+            case 2:
+                if(resultCode==Activity.RESULT_OK) {
+                    Log.w("result", "> new");
+                }
+                break;
+        }
+        updateList();
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -72,6 +86,30 @@ public class MainActivity extends Activity {
         this.menu = menu;
         getMenuInflater().inflate(R.menu.addbar, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.action_add:
+                createNew();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void createNew() {
+        Intent i = new Intent(getApplicationContext(), NewCityActivity.class);
+        startActivityForResult(i, 2);
+    }
+
+    private void updateList() {
+        Cursor c = wd.fetchAllCities();
+        wa.changeCursor(c);
+        wa.notifyDataSetChanged();
     }
 
 }

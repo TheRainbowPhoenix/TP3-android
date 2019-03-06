@@ -8,9 +8,9 @@ import java.net.URL;
 public class WebServiceUrl {
 
     // TODO: complete with your own API_KEY
-    private static final String API_KEY = "b6907d289e10d714a6e88b30761fae22";
+    private static final String API_KEY = "53cf5bf7a3a04b3889498725e3db8ae6";
 
-    // https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=b6907d289e10d714a6e88b30761fae22
+    // https://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=53cf5bf7a3a04b3889498725e3db8ae6
     //private static final String HOST = "samples.openweathermap.org";
     private static final String HOST = "api.openweathermap.org";
     private static final String PATH_1 = "data";

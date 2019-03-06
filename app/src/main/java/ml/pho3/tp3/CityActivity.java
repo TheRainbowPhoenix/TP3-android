@@ -1,6 +1,8 @@
 package ml.pho3.tp3;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -21,9 +23,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
+
+import android.os.AsyncTask;
 
 import ml.pho3.tp3.data.City;
 import ml.pho3.tp3.webservice.JSONResponseHandler;
@@ -66,8 +73,7 @@ public class CityActivity extends Activity {
 
             @Override
             public void onClick(View v) {
-            // TODO
-
+                doReload();
             }
         });
 
@@ -153,7 +159,78 @@ public class CityActivity extends Activity {
     }
 
     private void doReload() {
+        Log.d("async", "Reloading");
+        new Updatable(this).execute("");
         updateView();
+    }
+
+    private class Updatable extends AsyncTask<String, Void, String> {
+
+        AlertDialog alertDialog;
+        private Context c;
+
+        public Updatable(Context c) {
+            this.c = c;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            alertDialog = new AlertDialog.Builder(c).create();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String name = city.getName();
+            String country = city.getCountry();
+            URL url;
+            try {
+                url = WebServiceUrl.build(name, country);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+                Log.e("async", "Bad URL (city / country ?)");
+                return null;
+            }
+
+            HttpURLConnection urlConnection = null;
+            try {
+                urlConnection = (HttpURLConnection) url.openConnection();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.e("async", "No internet");
+            }
+
+            try {
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+
+                java.util.Scanner s = new java.util.Scanner(in).useDelimiter("\\A");
+                if (s.hasNext()) Log.e("out : ", s.next());
+
+                Log.w("out : ", "NULL");
+
+                //TODO: Proceed
+            } catch (UnknownHostException e) {
+
+                alertDialog.setTitle("Communication error");
+                alertDialog.setMessage("No internet ><'");
+
+                Log.e("async", "No internet");
+                return null;
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                urlConnection.disconnect();
+            }
+
+            return "Async :D";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            alertDialog.show();
+        }
+
     }
 
    
