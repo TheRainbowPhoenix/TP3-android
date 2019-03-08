@@ -121,6 +121,26 @@
 
                 <!-- other stuff -->
                 <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_margin="16dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/editDescription"
+                        android:foregroundGravity="center"
+                        android:gravity="center"
+                        android:textSize="24sp"
+                        android:textStyle="normal|bold"
+                        android:textAllCaps="false"
+                        android:textAlignment="center"
+                        android:text="Clear" />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/iconListSize"

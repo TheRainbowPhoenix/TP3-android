@@ -1,13 +1,16 @@
 package ml.pho3.tp3.webservice;
 
+import android.graphics.drawable.Icon;
 import android.util.JsonReader;
 import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import ml.pho3.tp3.adapter.IconDefines;
 import ml.pho3.tp3.data.City;
 
 /**
@@ -69,19 +72,24 @@ public class JSONResponseHandler {
 
     private void readWeather(JsonReader reader) throws IOException {
         reader.beginArray();
+        reader.beginObject();
         int nb = 0; // only consider the first element of the array
         while (reader.hasNext() && nb==0) {
-            reader.beginObject();
             String name = reader.nextName();
-            if(name.equals("icon")){
-                city.setIcon(reader.nextString());
+            if(name.equals("icon")) {
+                String ico = reader.nextString();
+                Log.w("icon", ico);
+                ico = IconDefines.getIconName(ico);
+                Log.w("icon", ico);
+                city.setIcon(ico);
+            } else if (name.equals("description")) {
+                city.setDescription(reader.nextString());
             } else {
                 reader.skipValue();
             }
-            while(reader.hasNext()) reader.skipValue();
-            reader.endObject();
-            nb++;
         }
+        nb++;
+        reader.endObject();
         reader.endArray();
     }
 
@@ -93,7 +101,6 @@ public class JSONResponseHandler {
                 city.setTemperature(kelvin2celsius(reader.nextDouble()));
             } else if (name.equals("humidity")) {
                 city.setHumidity(reader.nextString());
-                // TODO: complete
             } else {
                reader.skipValue();
             }
@@ -107,7 +114,6 @@ public class JSONResponseHandler {
             String name = reader.nextName();
             if (name.equals("speed")) {
                 city.setWindSpeed(reader.nextString());
-                // TODO: complete
             } else if (name.equals("deg")) {
                 city.setWindDirection(deg2compass(reader.nextInt()));
             } else {
@@ -119,14 +125,22 @@ public class JSONResponseHandler {
 
     private void readClouds(JsonReader reader) throws IOException {
         reader.beginObject();
-        while(reader.hasNext()) reader.skipValue();
-        // TODO: complete
+        while (reader.hasNext()) {
+            String name = reader.nextName();
+            if (name.equals("all")) {
+                city.setCloudiness(reader.nextString());
+            } else {
+                reader.skipValue();
+            }
+        }
         reader.endObject();
     }
 
     private String unixTime2date(long time) {
         Date date = new Date(time*1000);
-        return date.toString();
+        SimpleDateFormat sdfDate = new SimpleDateFormat("dd/MM HH:mm");
+        String strDate = sdfDate.format(date);
+        return strDate;
     }
 
     private String kelvin2celsius(double t) {

@@ -33,27 +33,35 @@ import java.net.UnknownHostException;
 import android.os.AsyncTask;
 
 import ml.pho3.tp3.data.City;
+import ml.pho3.tp3.data.WeatherDbHelper;
 import ml.pho3.tp3.webservice.JSONResponseHandler;
 import ml.pho3.tp3.webservice.WebServiceUrl;
 
 public class CityActivity extends Activity {
 
     private static final String TAG = CityActivity.class.getSimpleName();
-    private TextView textCityName, textCountry, textTemperature, textHumdity, textWind, textCloudiness, textLastUpdate;
+    private TextView textCityName, textCountry, textTemperature, textHumdity, textWind, textCloudiness, textLastUpdate, textDescription;
     private ImageView imageWeatherCondition;
+
+    private WeatherDbHelper wd;
 
     @NonNull
     private City city;
     private Menu menu;
+    private Updatable _update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city);
 
+        wd = new WeatherDbHelper(this);
+
         city = (City) getIntent().getParcelableExtra(City.TAG);
 
         Log.e("city_name","> "+city.getName());
+
+        _update = new Updatable(this);
 
         textCityName = (TextView) findViewById(R.id.nameCity);
         textCountry = (TextView) findViewById(R.id.country);
@@ -62,8 +70,11 @@ public class CityActivity extends Activity {
         textWind = (TextView) findViewById(R.id.editWind);
         textCloudiness = (TextView) findViewById(R.id.editCloudiness);
         textLastUpdate = (TextView) findViewById(R.id.editLastUpdate);
+        textDescription = (TextView) findViewById(R.id.editDescription);
 
         imageWeatherCondition = (ImageView) findViewById(R.id.imageView);
+
+        if(city.getTemperature() == null ||city.getTemperature().length() <1) doReload();
 
         updateView();
 
@@ -77,28 +88,54 @@ public class CityActivity extends Activity {
             }
         });
 
+
     }
+
+    private String fillWith(String value) {
+        return (value!=null)?(value):("0");
+    }
+    private String fillWith(String value, @NonNull String text) {
+        return (value!=null)?(value):(text);
+    }
+
 
     @Override
     public void onBackPressed() {
+
+        Intent i = new Intent(getApplicationContext(), CityActivity.class);
+
+        i.putExtra(City.TAG, city);
+
+        Log.e("city_name","> "+city.getName());
+
+        setResult(Activity.RESULT_OK, i);
+
+        if(_update.getStatus() != AsyncTask.Status.FINISHED) _update.cancel(true);
         //TODO : prepare result for the main activity
         super.onBackPressed();
     }
 
     private void updateView() {
-
         textCityName.setText(city.getName());
         textCountry.setText(city.getCountry());
-        textTemperature.setText(city.getTemperature()+" °C");
-        textHumdity.setText(city.getHumidity()+" %");
-        textWind.setText(city.getFullWind());
-        textCloudiness.setText(city.getHumidity()+" %");
-        textLastUpdate.setText(city.getLastUpdate());
+        textTemperature.setText(fillWith(city.getTemperature())+" °C");
+        textHumdity.setText(fillWith(city.getHumidity())+" %");
+        textWind.setText(fillWith(city.getFullWind()));
+        textCloudiness.setText(fillWith(city.getCloudiness())+" %");
+        textLastUpdate.setText(fillWith(city.getLastUpdate(),"01/01 00:00"));
+
+        String desc = city.getDescription();
+        if(desc != null && desc.length()>1) {
+            String output = desc.substring(0, 1).toUpperCase() + desc.substring(1);
+            textDescription.setText(output);
+        } else {
+            textDescription.setText("Empty");
+        }
 
         if (city.getIcon()!=null && !city.getIcon().isEmpty()) {
-            Log.d(TAG,"icon="+"icon_" + city.getIcon());
+            Log.d(TAG,"icon=" + city.getIcon());
             imageWeatherCondition.setImageDrawable(getResources().getDrawable(getResources()
-                    .getIdentifier("@drawable/"+"icon_" + city.getIcon(), null, getPackageName())));
+                    .getIdentifier("@drawable/"+ city.getIcon(), null, getPackageName())));
             imageWeatherCondition.setContentDescription(city.getDescription());
         }
 
@@ -160,7 +197,10 @@ public class CityActivity extends Activity {
 
     private void doReload() {
         Log.d("async", "Reloading");
-        new Updatable(this).execute("");
+        if(_update.getStatus() != AsyncTask.Status.RUNNING) {
+            if(_update.getStatus() == AsyncTask.Status.FINISHED) _update = new Updatable(this);
+            _update.execute("");
+        }
     }
 
     private class Updatable extends AsyncTask<String, Void, String> {
@@ -247,6 +287,7 @@ public class CityActivity extends Activity {
             super.onPostExecute(result);
             if(hasFailed) alertDialog.show();
             else {
+                wd.updateCity(city);
                 updateView();
             }
         }

@@ -35,9 +35,9 @@ public class WeatherAdapter extends CursorAdapter {
         String temp = cursor.getString(cursor.getColumnIndexOrThrow(WeatherDbHelper.COLUMN_TEMPERATURE));
         String ico = cursor.getString(cursor.getColumnIndexOrThrow(WeatherDbHelper.COLUMN_ICON));
 
-        if(ico == null) ico = "50d";
+        if(ico == null) ico = "weather_fog";
 
-        ico = IconDefines.getIconName(ico);
+        //ico = IconDefines.getIconName(ico);
 
         int id = context.getResources().getIdentifier(ico, "drawable", context.getPackageName());
 

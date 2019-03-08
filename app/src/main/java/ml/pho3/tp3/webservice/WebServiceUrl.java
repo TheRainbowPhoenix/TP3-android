@@ -22,7 +22,7 @@ public class WebServiceUrl {
     public static URL build(String cityName, String countryName) throws MalformedURLException {
 
         Uri.Builder builder = new Uri.Builder();
-        builder.scheme("https")
+        builder.scheme("http")
                 .authority(HOST)
                 .appendPath(PATH_1)
                 .appendPath(PATH_2)

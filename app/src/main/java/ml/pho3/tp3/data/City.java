@@ -73,7 +73,7 @@ public class City implements Parcelable {
     }
 
     public String getFullWind() {
-        return windSpeed+" km/h ("+windDirection+")";
+        return (windSpeed != null && windDirection != null)?(windSpeed+" km/h ("+windDirection+")"):null;
     }
 
     public String getCloudiness() {
@@ -85,7 +85,7 @@ public class City implements Parcelable {
     }
 
     public String getDescription() {
-        return icon;
+        return description;
     }
 
     public String getLastUpdate() {
