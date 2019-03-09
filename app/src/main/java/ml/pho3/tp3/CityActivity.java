@@ -23,8 +23,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.BufferedInputStream;
@@ -87,8 +89,6 @@ public class CityActivity extends Activity {
             findViewById(R.id.bot).setBackgroundColor(getResources().getColor(R.color.nightColor1));
         }
 
-
-
         /*long etim = System.currentTimeMillis() / 1000;
         //Log.w("epoch", ""+etim);
         long rise = city.getSunrise();
@@ -145,6 +145,21 @@ public class CityActivity extends Activity {
             }
 
         });
+
+        FrameLayout big = findViewById(R.id.big);
+        Animation aniScale = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.scale_fade_in);
+        aniScale.setStartOffset(250);
+        big.startAnimation(aniScale);
+
+        LinearLayout desc = findViewById(R.id.desc);
+        Animation aniFade = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fadein);
+        aniFade.setStartOffset(375);
+        desc.startAnimation(aniFade);
+
+        LinearLayout moar = findViewById(R.id.moar);
+        Animation aniFader = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fadein);
+        aniFader.setStartOffset(500);
+        moar.startAnimation(aniFader);
     }
 
     private void initReload() {
