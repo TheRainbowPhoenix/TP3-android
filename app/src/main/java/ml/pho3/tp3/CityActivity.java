@@ -36,6 +36,7 @@ import ml.pho3.tp3.data.City;
 import ml.pho3.tp3.data.WeatherDbHelper;
 import ml.pho3.tp3.webservice.JSONResponseHandler;
 import ml.pho3.tp3.webservice.WebServiceUrl;
+import ml.pho3.tp3.webservice.Updatable;
 
 public class CityActivity extends Activity {
 
@@ -48,7 +49,7 @@ public class CityActivity extends Activity {
     @NonNull
     private City city;
     private Menu menu;
-    private Updatable _update;
+    private _Updatable _update;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class CityActivity extends Activity {
 
         Log.e("city_name","> "+city.getName());
 
-        _update = new Updatable(this);
+        _update = new _Updatable(this);
 
         textCityName = (TextView) findViewById(R.id.nameCity);
         textCountry = (TextView) findViewById(R.id.country);
@@ -198,18 +199,28 @@ public class CityActivity extends Activity {
     private void doReload() {
         Log.d("async", "Reloading");
         if(_update.getStatus() != AsyncTask.Status.RUNNING) {
-            if(_update.getStatus() == AsyncTask.Status.FINISHED) _update = new Updatable(this);
+            if(_update.getStatus() == AsyncTask.Status.FINISHED) {
+                Log.d("",city.toString());
+                _update = new _Updatable(this);
+                /*_update = new Updatable(this, this.city) {
+                    @Override
+                    public String onSuccess(String result) {
+                        updateView();
+                        return result;
+                    }
+                };*/
+            }
             _update.execute("");
         }
     }
 
-    private class Updatable extends AsyncTask<String, Void, String> {
+    private class _Updatable extends AsyncTask<String, Void, String> {
 
         AlertDialog alertDialog;
         private Context c;
         private boolean hasFailed = false;
 
-        public Updatable(Context c) {
+        public _Updatable(Context c) {
             this.c = c;
         }
 
@@ -236,8 +247,8 @@ public class CityActivity extends Activity {
             try {
                 urlConnection = (HttpURLConnection) url.openConnection();
             } catch (IOException e) {
-                alertDialog.setTitle("Communication error");
-                alertDialog.setMessage("Application cannot connect");
+                alertDialog.setTitle(R.string.ComError);
+                alertDialog.setMessage(getString(R.string.conFail));
 
                 Log.e("async", "No internet");
 
@@ -253,13 +264,22 @@ public class CityActivity extends Activity {
                 if (s.hasNext()) Log.e("out : ", s.next());
                 else Log.w("out : ", "NULL");*/
 
-                JSONResponseHandler jr = new JSONResponseHandler(city);
-                jr.readJsonStream(in);
+                try {
+                    JSONResponseHandler jr = new JSONResponseHandler(city);
+                    jr.readJsonStream(in);
+                } catch (Exception e) {
+                    alertDialog.setTitle(getString(R.string.ComError));
+                    alertDialog.setMessage(getString(R.string.conIOError));
+                    e.printStackTrace();
+                    hasFailed = true;
+                    return null;
+                }
+
 
             } catch (UnknownHostException e) {
 
-                alertDialog.setTitle("Communication error");
-                alertDialog.setMessage("No internet ><'");
+                alertDialog.setTitle(getString(R.string.ComError));
+                alertDialog.setMessage(getString(R.string.noInternet));
 
                 Log.e("async", "No internet");
 
@@ -267,8 +287,8 @@ public class CityActivity extends Activity {
                 return null;
             } catch (IOException e) {
 
-                alertDialog.setTitle("Communication error");
-                alertDialog.setMessage("IO Exception : Host replied wrongly");
+                alertDialog.setTitle(R.string.ComError);
+                alertDialog.setMessage(getString(R.string.conIOError));
 
                 Log.e("async", "No internet");
 
@@ -291,7 +311,6 @@ public class CityActivity extends Activity {
                 updateView();
             }
         }
-
     }
 
    

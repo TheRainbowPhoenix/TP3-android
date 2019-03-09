@@ -173,6 +173,20 @@ public class City implements Parcelable {
         }
     };
 
+    public City(City c) {
+        this.id = c.getId();
+        this.name = c.getName();
+        this.country = c.getCountry();
+        this.temperature = c.getTemperature();
+        this.humidity = c.getHumidity();
+        this.windSpeed = c.getWindSpeed();
+        this.windDirection = c.getWindDirection();
+        this.cloudiness = c.getCloudiness();
+        this.icon = c.getIcon();
+        this.description = c.getDescription();
+        this.lastUpdate = c.getLastUpdate();
+    }
+
     public City(Parcel in) {
         this.id = in.readLong();
         this.name = in.readString();

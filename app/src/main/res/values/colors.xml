@@ -13,4 +13,6 @@
     <color name="statusBarColor">#22272B</color>
     <color name="switchTrackNormal">#B9B9B9</color>
     <color name="BotBG">#4dbccf</color>
+    <color name="swipeColor1">#ff6242d9</color>
+    <color name="swipeColor2">#ff4bc5d4</color>
 </resources>

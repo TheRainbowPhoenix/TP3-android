@@ -7,4 +7,5 @@
     <dimen name="big_text">32dip</dimen>
     <dimen name="iconListSize">24dip</dimen>
     <dimen name="smallTextSize">16dip</dimen>
+    <dimen name="swipeRefreshSize">24dip</dimen>
 </resources>

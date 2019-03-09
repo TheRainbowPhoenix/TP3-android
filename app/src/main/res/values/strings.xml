@@ -3,4 +3,8 @@
     <string name="main">Countries</string>
     <string name="reload">Reload</string>
     <string name="add_city">Add city</string>
+    <string name="noInternet"><![CDATA[No internet ><\']]></string>
+    <string name="ComError">Communication error</string>
+    <string name="conFail">Application cannot connect</string>
+    <string name="conIOError">IO Exception : Host replied wrongly</string>
 </resources>
