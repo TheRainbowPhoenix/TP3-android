@@ -13,6 +13,9 @@
     <color name="statusBarColor">#22272B</color>
     <color name="switchTrackNormal">#B9B9B9</color>
     <color name="BotBG">#4dbccf</color>
+    <color name="transparent">#00000000</color>
     <color name="swipeColor1">#ff6242d9</color>
     <color name="swipeColor2">#ff4bc5d4</color>
+    <color name="nightColor1">#ff9c589b</color>
+    <color name="nightColor2">#ff351446</color>
 </resources>

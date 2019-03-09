@@ -56,6 +56,8 @@ public class JSONResponseHandler {
                 readWeather(reader);
             } else if (name.equals("main")) {
                 readMain(reader);
+            } else if (name.equals("sys")) {
+                readTimes(reader);
             } else if (name.equals("wind")) {
                 readWind(reader);
             } else if (name.equals("clouds")) {
@@ -78,6 +80,7 @@ public class JSONResponseHandler {
             String name = reader.nextName();
             if(name.equals("icon")) {
                 String ico = reader.nextString();
+                city.setNight((ico!=null && ico.endsWith("n"))?(1):(0));
                 Log.w("icon", ico);
                 ico = IconDefines.getIconName(ico);
                 Log.w("icon", ico);
@@ -108,6 +111,21 @@ public class JSONResponseHandler {
         reader.endObject();
     }
 
+    private void readTimes(JsonReader reader) throws IOException {
+        reader.beginObject();
+        while (reader.hasNext()) {
+            String name = reader.nextName();
+            if (name.equals("sunrise")) {
+                city.setSunrise(reader.nextLong());
+            } else if (name.equals("sunset")) {
+                city.setSunset(reader.nextLong());
+            } else {
+                reader.skipValue();
+            }
+        }
+        reader.endObject();
+    }
+
     private void readWind(JsonReader reader) throws IOException {
         reader.beginObject();
         while (reader.hasNext()) {
@@ -115,7 +133,12 @@ public class JSONResponseHandler {
             if (name.equals("speed")) {
                 city.setWindSpeed(reader.nextString());
             } else if (name.equals("deg")) {
-                city.setWindDirection(deg2compass(reader.nextInt()));
+                try {
+                    city.setWindDirection(deg2compass(reader.nextInt()));
+                } catch (NumberFormatException e) {
+                    city.setWindDirection(deg2compass(1));
+                    reader.skipValue();
+                }
             } else {
                 reader.skipValue();
             }

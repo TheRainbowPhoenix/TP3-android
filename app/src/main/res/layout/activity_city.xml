@@ -339,8 +339,8 @@
             android:layout_height="fill_parent"
             android:layout_alignParentEnd="true"
             android:layout_weight="1"
-            android:background="@color/BotBG"
-            android:backgroundTint="@color/BotBG"
+            android:background="@color/transparent"
+            android:backgroundTint="@color/transparent"
             app:srcCompat="@drawable/ic_action_refresh" />
 
     </RelativeLayout>

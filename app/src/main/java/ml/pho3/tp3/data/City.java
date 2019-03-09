@@ -23,6 +23,11 @@ public class City implements Parcelable {
     private String description; // description of the current weather condition (ex: light intensity drizzle)
     private String lastUpdate; // Last time when data was updated
 
+    private long sunset;
+    private long sunrise;
+
+    private int isNight;
+
     public City() {}
 
     public City(String name, String country) {
@@ -42,6 +47,22 @@ public class City implements Parcelable {
         this.icon = icon;
         this.description = description;
         this.lastUpdate = lastUpdate;
+        this.sunset = 0;
+        this.sunrise = 1;
+        this.isNight = 0;
+    }
+
+    public City(long id, String name, String country, String temperature, String humidity, String windSpeed, String windDirection, String cloudiness, String icon, String description, String lastUpdate, long sunset, long sunrise) {
+        this(id, name, country, temperature, humidity, windSpeed, windDirection, cloudiness, icon, description, lastUpdate);
+        this.sunset = sunset;
+        this.sunrise = sunrise;
+    }
+
+    public City(long id, String name, String country, String temperature, String humidity, String windSpeed, String windDirection, String cloudiness, String icon, String description, String lastUpdate, long sunset, long sunrise, int night) {
+        this(id, name, country, temperature, humidity, windSpeed, windDirection, cloudiness, icon, description, lastUpdate);
+        this.sunset = sunset;
+        this.sunrise = sunrise;
+        this.isNight = (night!=0)?(1):0;
     }
 
     public long getId() {
@@ -92,6 +113,12 @@ public class City implements Parcelable {
         return lastUpdate;
     }
 
+    public long getSunset() { return sunset; }
+
+    public long getSunrise() { return sunrise; }
+
+    public int getNight() { return isNight; }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -132,6 +159,11 @@ public class City implements Parcelable {
         this.lastUpdate = lastUpdate;
     }
 
+    public void setSunset(long time) { this.sunset = time; }
+
+    public void setSunrise(long time) { this.sunrise = time; }
+
+    public void setNight(int n) { this.isNight = (n!=0)?(1):0; }
 
     @Override
     public String toString() {
@@ -156,6 +188,9 @@ public class City implements Parcelable {
         dest.writeString(icon);
         dest.writeString(description);
         dest.writeString(lastUpdate);
+        dest.writeLong(sunrise);
+        dest.writeLong(sunset);
+        dest.writeInt(isNight);
     }
 
     public static final Creator<City> CREATOR = new Creator<City>()
@@ -185,6 +220,9 @@ public class City implements Parcelable {
         this.icon = c.getIcon();
         this.description = c.getDescription();
         this.lastUpdate = c.getLastUpdate();
+        this.sunrise = c.getSunrise();
+        this.sunset = c.getSunset();
+        this.isNight = c.getNight();
     }
 
     public City(Parcel in) {
@@ -199,5 +237,8 @@ public class City implements Parcelable {
         this.icon = in.readString();
         this.description = in.readString();
         this.lastUpdate = in.readString();
+        this.sunrise = in.readLong();
+        this.sunset = in.readLong();
+        this.isNight = in.readInt();
     }
 }

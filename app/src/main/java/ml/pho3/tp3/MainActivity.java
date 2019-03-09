@@ -1,6 +1,7 @@
 package ml.pho3.tp3;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -12,12 +13,17 @@ import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v4.widget.ViewDragHelper;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.helper.ItemTouchHelper.Callback;
 import android.util.Log;
+import android.util.SparseBooleanArray;
+import android.view.ActionMode;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,6 +39,8 @@ public class MainActivity extends Activity {
     private WeatherAdapter wa;
     private Menu menu;
 
+    private ListView listview;
+
     private SwipeRefreshLayout swipeRefresh;
 
     @Override
@@ -46,15 +54,16 @@ public class MainActivity extends Activity {
 
         Cursor c = wd.fetchAllCities();
 
-        final ListView listview = (ListView) findViewById(R.id.listView);
+        listview = (ListView) findViewById(R.id.listView);
 
         wa = new WeatherAdapter(this, c);
 
         listview.setAdapter(wa);
-        listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        listview.setItemChecked(2, true);
+        listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+        listview.setMultiChoiceModeListener(new ModeCallback());
+        listview.setItemsCanFocus(false);
 
-        registerForContextMenu(listview);
+        //registerForContextMenu(listview);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -77,6 +86,77 @@ public class MainActivity extends Activity {
 
         getActionBar().setDisplayShowCustomEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
+    }
+
+    private void deleteKey(int k) {
+        Log.i("Item",""+k);
+        if(k<wa.getCount()) {
+            Cursor c = (Cursor) wa.getItem(k);
+            City city = wd.cursorToCity(c);
+            if(city != null && c != null) {
+                wd.deleteCity(c);
+            }
+        }
+
+    }
+
+    private class ModeCallback implements ListView.MultiChoiceModeListener {
+
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.delete, menu);
+            mode.setTitle("1");
+            mode.setSubtitle(null);
+            return true;
+        }
+
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return true;
+        }
+
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.action_delete:
+                    Toast.makeText(MainActivity.this, "Shared " + listview.getCheckedItemCount() +
+                            " items", Toast.LENGTH_SHORT).show();
+
+                    SparseBooleanArray checkedItems = listview.getCheckedItemPositions();
+
+                    for(int i=checkedItems.size()-1 ;i>= 0;i--){
+
+                        if(checkedItems.valueAt(i)){
+                            deleteKey(checkedItems.keyAt(i));
+                        }
+                    }
+
+                    updateList();
+
+                    mode.finish();
+                    break;
+                default:
+                    break;
+            }
+            return true;
+        }
+
+        public void onDestroyActionMode(ActionMode mode) {
+        }
+
+        public void onItemCheckedStateChanged(ActionMode mode,
+                                              int position, long id, boolean checked) {
+            final int checkedCount = listview.getCheckedItemCount();
+            switch (checkedCount) {
+                case 0:
+                    mode.setSubtitle(null);
+                    break;
+                case 1:
+                    mode.setTitle("1");
+                    break;
+                default:
+                    mode.setTitle("" + checkedCount);
+                    break;
+            }
+        }
     }
 
     private void initSwipeRefresh() {
@@ -155,42 +235,7 @@ public class MainActivity extends Activity {
 
     private void refreshCityList() {
         new UpdateCitiesAsync().execute("");
-        //UpdateCitiesHandler.sendEmptyMessage(100);
-        /*UpdateCitiesHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefresh.setRefreshing(false);
-            }
-        }, 5000);*/
-
-        //swipeRefresh.setRefreshing(false);
-
-        /*new Handler().postDelayed(new Runnable() {
-            @Override public void run() {
-                swipeRefresh.setRefreshing(false);
-            }
-        }, 5000);*/
-        //swipeRefresh.setRefreshing(false);
-        //updateList();
     }
-
-    private Handler UpdateCitiesHandler = new Handler(Looper.getMainLooper()) {
-        public void handleMessage(Message message) {
-            if(!MainActivity.this.isFinishing() && MainActivity.this.isDestroyed()) {
-                switch (message.what) {
-                    case 100:
-                        Log.w("M","100");
-                        return;
-                    case 200:
-                        Log.w("M","200");
-                        return;
-                    default:
-                        return;
-                }
-            }
-        }
-
-    };
 
     private class UpdateCitiesAsync extends AsyncTask<String, Void, String> {
 
@@ -198,9 +243,9 @@ public class MainActivity extends Activity {
         protected String doInBackground(String... strings) {
             Cursor c = wd.fetchAllCities();
             Updater u = new Updater(getApplicationContext());
-            while(c.moveToNext()) {
+
+            for (c.moveToFirst(); !c.isAfterLast(); c.moveToNext()) {
                 City city = u.updateCity(wd.cursorToCity(c));
-                Log.w("aa", ""+city.getTemperature());
                 if(city != null) {
                     wd.updateCity(city);
                 }

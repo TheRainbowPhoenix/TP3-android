@@ -1,10 +1,12 @@
 package ml.pho3.tp3;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -17,6 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -51,10 +56,16 @@ public class CityActivity extends Activity {
     private Menu menu;
     private _Updatable _update;
 
+    private Animation loadAnim;
+    private ImageButton but;
+    private boolean loadComplete = true;
+    private boolean canLoop = true;
+
+    private boolean nightMode = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_city);
 
         wd = new WeatherDbHelper(this);
 
@@ -62,7 +73,52 @@ public class CityActivity extends Activity {
 
         Log.e("city_name","> "+city.getName());
 
+        if(city.getNight() != 0) {
+            nightMode = true;
+            setTheme(R.style.Theme_Weather_Detail_Night);
+            //getWindow().setNavigationBarColor(getResources().getColor(R.color.nightColor1, R.style.Theme_Weather_Detail_Night));
+        }
+
+        setContentView(R.layout.activity_city);
+
+        if(nightMode) {
+            findViewById(R.id.cont).setBackgroundResource(R.drawable.gradient_bg_night);
+            getTheme().applyStyle(R.style.Theme_Weather_Detail_Night, true);
+            findViewById(R.id.bot).setBackgroundColor(getResources().getColor(R.color.nightColor1));
+        }
+
+
+
+        /*long etim = System.currentTimeMillis() / 1000;
+        //Log.w("epoch", ""+etim);
+        long rise = city.getSunrise();
+        long set = city.getSunset();
+        Log.w("night", ""+city.getNight());
+        //Log.w("epoch", "set>etim : "+(set>etim)+"  rise "+city.getSunrise() +  ",  set "+city.getSunset()+",  now "+etim);*/
+
         _update = new _Updatable(this);
+
+        loadAnim = AnimationUtils.loadAnimation(CityActivity.this.getApplicationContext(), R.anim.rotate);
+
+        loadAnim.setAnimationListener(new Animation.AnimationListener(){
+            @Override
+            public void onAnimationStart(Animation arg0) {
+                loadComplete = false;
+                canLoop = false;
+            }
+            @Override
+            public void onAnimationRepeat(Animation arg0) {
+                if(loadComplete) {
+                    but.clearAnimation();
+                    canLoop = true;
+                }
+            }
+            @Override
+            public void onAnimationEnd(Animation arg0) {
+                if(!loadComplete) but.startAnimation(loadAnim);
+                else canLoop = true;
+            }
+        });
 
         textCityName = (TextView) findViewById(R.id.nameCity);
         textCountry = (TextView) findViewById(R.id.country);
@@ -79,17 +135,28 @@ public class CityActivity extends Activity {
 
         updateView();
 
-        final ImageButton but = (ImageButton) findViewById(R.id.refreshButton);
+        but = (ImageButton) findViewById(R.id.refreshButton);
 
         but.setOnClickListener(new View.OnClickListener() {
-
             @Override
-            public void onClick(View v) {
-                doReload();
+            public void onClick(View view)
+            {
+                initReload();
             }
+
         });
+    }
 
+    private void initReload() {
+        if(loadComplete && canLoop) {
+            but.startAnimation(loadAnim);
+            doReload();
+        }
+    }
 
+    private void endReload() {
+        loadComplete = true;
+        //but.clearAnimation();
     }
 
     private String fillWith(String value) {
@@ -190,7 +257,7 @@ public class CityActivity extends Activity {
                 //NavUtils.navigateUpFromSameTask(this);
                 return true;
             case R.id.action_reload:
-                doReload();
+                initReload();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -307,6 +374,7 @@ public class CityActivity extends Activity {
             super.onPostExecute(result);
             if(hasFailed) alertDialog.show();
             else {
+                endReload();
                 wd.updateCity(city);
                 updateView();
             }

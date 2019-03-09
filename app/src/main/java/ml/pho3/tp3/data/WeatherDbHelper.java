@@ -35,6 +35,9 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ICON = "icon";
     public static final String COLUMN_DESCRIPTION = "description";
     public static final String COLUMN_LAST_UPDATE = "lastupdate";
+    public static final String COLUMN_SUNRISE= "sunrise";
+    public static final String COLUMN_SUNSET = "sunset";
+    public static final String COLUMN_NIGHT = "night";
 
     public WeatherDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -57,6 +60,9 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 COLUMN_DESCRIPTION+ " TEXT, " +
                 COLUMN_ICON+ " TEXT, " +
                 COLUMN_LAST_UPDATE+ " TEXT, " +
+                COLUMN_SUNRISE+ " TEXT, " +
+                COLUMN_SUNSET+ " TEXT, " +
+                COLUMN_NIGHT+ " INTEGER, " +
 
                 // To assure the application have just one weather entry per
                 // city name and country, it's created a UNIQUE
@@ -92,6 +98,9 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
         values.put(COLUMN_ICON, city.getIcon());
         values.put(COLUMN_DESCRIPTION, city.getDescription());
         values.put(COLUMN_LAST_UPDATE, city.getLastUpdate());
+        values.put(COLUMN_SUNRISE, city.getSunrise());
+        values.put(COLUMN_SUNSET, city.getSunset());
+        values.put(COLUMN_NIGHT, city.getNight());
 
         Log.d(TAG, "adding: "+city.getName()+" with id="+city.getId());
 
@@ -122,6 +131,10 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
         values.put(COLUMN_ICON, city.getIcon());
         values.put(COLUMN_DESCRIPTION, city.getDescription());
         values.put(COLUMN_LAST_UPDATE, city.getLastUpdate());
+        values.put(COLUMN_SUNRISE, city.getSunrise());
+        values.put(COLUMN_SUNSET, city.getSunset());
+        values.put(COLUMN_NIGHT, city.getNight());
+
 
         // updating row
         return db.updateWithOnConflict(TABLE_NAME, values, _ID + " = ?",
@@ -206,7 +219,10 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 cursor.getString(cursor.getColumnIndex(COLUMN_CLOUDINESS)),
                 cursor.getString(cursor.getColumnIndex(COLUMN_ICON)),
                 cursor.getString(cursor.getColumnIndex(COLUMN_DESCRIPTION)),
-                cursor.getString(cursor.getColumnIndex(COLUMN_LAST_UPDATE))
+                cursor.getString(cursor.getColumnIndex(COLUMN_LAST_UPDATE)),
+                cursor.getLong(cursor.getColumnIndex(COLUMN_SUNRISE)),
+                cursor.getLong(cursor.getColumnIndex(COLUMN_SUNSET)),
+                cursor.getInt(cursor.getColumnIndex(COLUMN_NIGHT))
         );
         return city;
     }

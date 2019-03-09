@@ -7,4 +7,5 @@
     <string name="ComError">Communication error</string>
     <string name="conFail">Application cannot connect</string>
     <string name="conIOError">IO Exception : Host replied wrongly</string>
+    <string name="delete">delete</string>
 </resources>

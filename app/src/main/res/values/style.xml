@@ -16,6 +16,7 @@
    <!-- Application theme. -->
    <style name="AppTheme" parent="AppBaseTheme">
 	   <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+       <item name="android:activatedBackgroundIndicator">@drawable/muliple_selected_item</item>
     </style>
     
    <style name="CustomButtonStyle"></style>
@@ -35,8 +36,24 @@
         <item name="android:visibility">gone</item>
     </style>
 
+    <style name="activated" parent="AppTheme">
+        <item name="android:background">@color/colorAccent</item>
+    </style>
+
     <style name="Theme.Weather.Detail" parent="@style/AppTheme">
         <item name="android:windowBackground">@drawable/gradient_bg</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownListViewStyle</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowDisablePreview">false</item>
+        <item name="android:actionBarStyle">@style/Weather.ActionBar</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:actionModeCloseButtonStyle">@style/NoCloseButton</item>
+        <item name="android:actionMenuTextColor">@color/textColorPrimary</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.Weather.Detail_Night" parent="@style/AppTheme">
+        <item name="android:windowBackground">@drawable/gradient_bg_night</item>
         <item name="android:dropDownListViewStyle">@style/DropDownListViewStyle</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowDisablePreview">false</item>
