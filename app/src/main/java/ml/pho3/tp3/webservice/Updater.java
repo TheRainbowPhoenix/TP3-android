@@ -1,7 +1,9 @@
 package ml.pho3.tp3.webservice;
 
 import android.app.AlertDialog;
+import android.app.IntentService;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
@@ -16,18 +18,25 @@ import ml.pho3.tp3.R;
 import ml.pho3.tp3.data.City;
 import ml.pho3.tp3.data.WeatherDbHelper;
 
-/**
- * Created by HP on 09/03/2019.
- */
 
-public class Updater {
+public class Updater extends IntentService {
 
     private Context c;
     private boolean hasFailed = false;
     String err = "";
 
+    public Updater() {
+        super("Updater");
+    }
+
     public Updater(Context c) {
+        super("Updater");
+
         this.c = c;
+    }
+
+    public Updater(String name) {
+        super(name);
     }
 
     public City updateCity(City city) {
@@ -55,6 +64,7 @@ public class Updater {
             hasFailed = true;
 
             e.printStackTrace();
+            return null;
         }
 
         try {
@@ -90,11 +100,17 @@ public class Updater {
             hasFailed = true;
 
             e.printStackTrace();
+            return null;
         } finally {
             urlConnection.disconnect();
         }
 
 
         return city;
+    }
+
+    @Override
+    protected void onHandleIntent(Intent intent) {
+        Log.w("Updater", "Handle Intent");
     }
 }

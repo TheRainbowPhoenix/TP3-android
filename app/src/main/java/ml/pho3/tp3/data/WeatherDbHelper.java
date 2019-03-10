@@ -38,6 +38,9 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
     public static final String COLUMN_SUNRISE= "sunrise";
     public static final String COLUMN_SUNSET = "sunset";
     public static final String COLUMN_NIGHT = "night";
+    public static final String COLUMN_PRESSURE = "pressure";
+    public static final String COLUMN_TEMP_MIN = "temp_min";
+    public static final String COLUMN_TEMP_MAX = "temp_max";
 
     public WeatherDbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -63,6 +66,9 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 COLUMN_SUNRISE+ " TEXT, " +
                 COLUMN_SUNSET+ " TEXT, " +
                 COLUMN_NIGHT+ " INTEGER, " +
+                COLUMN_PRESSURE+ " TEXT, " +
+                COLUMN_TEMP_MIN+ " TEXT, " +
+                COLUMN_TEMP_MAX+ " TEXT, " +
 
                 // To assure the application have just one weather entry per
                 // city name and country, it's created a UNIQUE
@@ -101,6 +107,9 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
         values.put(COLUMN_SUNRISE, city.getSunrise());
         values.put(COLUMN_SUNSET, city.getSunset());
         values.put(COLUMN_NIGHT, city.getNight());
+        values.put(COLUMN_PRESSURE, city.getPressure());
+        values.put(COLUMN_TEMP_MIN, city.getTempMin());
+        values.put(COLUMN_TEMP_MAX, city.getTempMax());
 
         Log.d(TAG, "adding: "+city.getName()+" with id="+city.getId());
 
@@ -134,6 +143,9 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
         values.put(COLUMN_SUNRISE, city.getSunrise());
         values.put(COLUMN_SUNSET, city.getSunset());
         values.put(COLUMN_NIGHT, city.getNight());
+        values.put(COLUMN_PRESSURE, city.getPressure());
+        values.put(COLUMN_TEMP_MIN, city.getTempMin());
+        values.put(COLUMN_TEMP_MAX, city.getTempMax());
 
 
         // updating row
@@ -222,7 +234,10 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 cursor.getString(cursor.getColumnIndex(COLUMN_LAST_UPDATE)),
                 cursor.getLong(cursor.getColumnIndex(COLUMN_SUNRISE)),
                 cursor.getLong(cursor.getColumnIndex(COLUMN_SUNSET)),
-                cursor.getInt(cursor.getColumnIndex(COLUMN_NIGHT))
+                cursor.getInt(cursor.getColumnIndex(COLUMN_NIGHT)),
+                cursor.getString(cursor.getColumnIndex(COLUMN_PRESSURE)),
+                cursor.getString(cursor.getColumnIndex(COLUMN_TEMP_MIN)),
+                cursor.getString(cursor.getColumnIndex(COLUMN_TEMP_MAX))
         );
         return city;
     }

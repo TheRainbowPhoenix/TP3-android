@@ -3,6 +3,7 @@ package ml.pho3.tp3.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import ml.pho3.tp3.SearchActivity;
 
 
 public class City implements Parcelable {
@@ -22,17 +23,25 @@ public class City implements Parcelable {
     private String icon; // icon name (ex: 09d)
     private String description; // description of the current weather condition (ex: light intensity drizzle)
     private String lastUpdate; // Last time when data was updated
-
     private long sunset;
-    private long sunrise;
 
+    private long sunrise;
     private int isNight;
+
+    private String pressure;
+    private String tempMin;
+    private String tempMax;
 
     public City() {}
 
     public City(String name, String country) {
         this.name = name;
         this.country = country;
+    }
+
+    public City(SearchCity s) {
+        this.name = s.getName();
+        this.country = s.getCountry();
     }
 
     public City(long id, String name, String country, String temperature, String humidity, String windSpeed, String windDirection, String cloudiness, String icon, String description, String lastUpdate) {
@@ -50,6 +59,9 @@ public class City implements Parcelable {
         this.sunset = 0;
         this.sunrise = 1;
         this.isNight = 0;
+        this.pressure = "1000";
+        this.tempMin = temperature;
+        this.tempMax = temperature;
     }
 
     public City(long id, String name, String country, String temperature, String humidity, String windSpeed, String windDirection, String cloudiness, String icon, String description, String lastUpdate, long sunset, long sunrise) {
@@ -57,12 +69,27 @@ public class City implements Parcelable {
         this.sunset = sunset;
         this.sunrise = sunrise;
     }
+    public City(long id, String name, String country, String temperature, String humidity, String windSpeed, String windDirection, String cloudiness, String icon, String description, String lastUpdate, String tempMin, String tempMax) {
+        this(id, name, country, temperature, humidity, windSpeed, windDirection, cloudiness, icon, description, lastUpdate);
+        this.tempMin = tempMin;
+        this.tempMax = tempMax;
+    }
 
     public City(long id, String name, String country, String temperature, String humidity, String windSpeed, String windDirection, String cloudiness, String icon, String description, String lastUpdate, long sunset, long sunrise, int night) {
         this(id, name, country, temperature, humidity, windSpeed, windDirection, cloudiness, icon, description, lastUpdate);
         this.sunset = sunset;
         this.sunrise = sunrise;
         this.isNight = (night!=0)?(1):0;
+    }
+
+    public City(long id, String name, String country, String temperature, String humidity, String windSpeed, String windDirection, String cloudiness, String icon, String description, String lastUpdate, long sunset, long sunrise, int night, String pressure, String tempMin, String tempMax) {
+        this(id, name, country, temperature, humidity, windSpeed, windDirection, cloudiness, icon, description, lastUpdate);
+        this.sunset = sunset;
+        this.sunrise = sunrise;
+        this.isNight = (night!=0)?(1):0;
+        this.pressure = pressure;
+        this.tempMin = tempMin;
+        this.tempMax = tempMax;
     }
 
     public long getId() {
@@ -119,6 +146,12 @@ public class City implements Parcelable {
 
     public int getNight() { return isNight; }
 
+    public String getPressure() { return pressure; }
+
+    public String getTempMax() { return tempMax; }
+
+    public String getTempMin() { return tempMin; }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -165,6 +198,12 @@ public class City implements Parcelable {
 
     public void setNight(int n) { this.isNight = (n!=0)?(1):0; }
 
+    public void setPressure(String p) { this.pressure = p; }
+
+    public void setTempMin(String t) {this.tempMin = t; }
+
+    public void setTempMax(String t) {this.tempMax = t; }
+
     @Override
     public String toString() {
         return this.name+"("+this.country+"): "+this.temperature+"°C";
@@ -191,6 +230,9 @@ public class City implements Parcelable {
         dest.writeLong(sunrise);
         dest.writeLong(sunset);
         dest.writeInt(isNight);
+        dest.writeString(pressure);
+        dest.writeString(tempMin);
+        dest.writeString(tempMax);
     }
 
     public static final Creator<City> CREATOR = new Creator<City>()
@@ -223,6 +265,9 @@ public class City implements Parcelable {
         this.sunrise = c.getSunrise();
         this.sunset = c.getSunset();
         this.isNight = c.getNight();
+        this.pressure = c.getPressure();
+        this.tempMin = c.getTempMin();
+        this.tempMax = c.getTempMax();
     }
 
     public City(Parcel in) {
@@ -240,5 +285,8 @@ public class City implements Parcelable {
         this.sunrise = in.readLong();
         this.sunset = in.readLong();
         this.isNight = in.readInt();
+        this.pressure = in.readString();
+        this.tempMin = in.readString();
+        this.tempMax = in.readString();
     }
 }

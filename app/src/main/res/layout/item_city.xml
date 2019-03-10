@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:orientation="horizontal"
+    android:background="?android:attr/activatedBackgroundIndicator"
+    tools:layout_editor_absoluteY="81dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteY="8dp"
+            tools:layout_editor_absoluteX="8dp"
+            android:layout_weight="1"
+            android:paddingLeft="8dip">
+
+            <TextView
+                android:id="@+id/sName"
+                android:layout_width="match_parent"
+                android:layout_height="34dip"
+                android:text="Paris"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewRow"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="32dp"
+                app:layout_constraintVertical_bias="1.0"
+                android:layout_weight="1"
+                android:elevation="1dp" />
+
+            <TextView
+                android:id="@+id/sCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="France"
+                android:textColor="@android:color/darker_gray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cName"
+                tools:layout_editor_absoluteX="131dp" />
+
+        </LinearLayout>
+
+</LinearLayout>

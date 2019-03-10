@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <!-- "Mark Favorite", should appear as action button if possible -->
+    <item android:title="Item"
+        android:icon="@drawable/ic_action_refresh"
+        android:id="@+id/action_search"
+        android:showAsAction="ifRoom"/>
     <item
         android:id="@+id/action_save"
         android:title="@string/save"

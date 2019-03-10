@@ -19,6 +19,9 @@ public class WebServiceUrl {
     private static final String URL_PARAM1 = "q";
     private static final String URL_PARAM2 = "appid";
 
+    //Find cities
+    //https://samples.openweathermap.org/data/2.5/find?q= {city_name} &appid=53cf5bf7a3a04b3889498725e3db8ae6
+
     public static URL build(String cityName, String countryName) throws MalformedURLException {
 
         Uri.Builder builder = new Uri.Builder();

@@ -117,8 +117,6 @@ public class MainActivity extends Activity {
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.action_delete:
-                    Toast.makeText(MainActivity.this, "Shared " + listview.getCheckedItemCount() +
-                            " items", Toast.LENGTH_SHORT).show();
 
                     SparseBooleanArray checkedItems = listview.getCheckedItemPositions();
 
@@ -223,8 +221,13 @@ public class MainActivity extends Activity {
     }
 
     public void createNew() {
-        Intent i = new Intent(getApplicationContext(), NewCityActivity.class);
-        startActivityForResult(i, 2);
+        if(Utils.isNetworkConnected(getApplicationContext())) {
+            Intent i = new Intent(getApplicationContext(), NewCityActivity.class);
+            startActivityForResult(i, 2);
+        } else {
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.noInternet, Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
 
     private void updateList() {

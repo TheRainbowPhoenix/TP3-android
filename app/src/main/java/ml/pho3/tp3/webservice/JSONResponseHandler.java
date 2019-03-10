@@ -81,9 +81,7 @@ public class JSONResponseHandler {
             if(name.equals("icon")) {
                 String ico = reader.nextString();
                 city.setNight((ico!=null && ico.endsWith("n"))?(1):(0));
-                Log.w("icon", ico);
                 ico = IconDefines.getIconName(ico);
-                Log.w("icon", ico);
                 city.setIcon(ico);
             } else if (name.equals("description")) {
                 city.setDescription(reader.nextString());
@@ -93,6 +91,7 @@ public class JSONResponseHandler {
         }
         nb++;
         reader.endObject();
+        while (reader.hasNext()) reader.skipValue();
         reader.endArray();
     }
 
@@ -104,6 +103,12 @@ public class JSONResponseHandler {
                 city.setTemperature(kelvin2celsius(reader.nextDouble()));
             } else if (name.equals("humidity")) {
                 city.setHumidity(reader.nextString());
+            } else if (name.equals("pressure")) {
+                city.setPressure(reader.nextString());
+            } else if (name.equals("temp_min")) {
+                city.setTempMin(kelvin2celsius(reader.nextDouble()));
+            } else if (name.equals("temp_max")) {
+                city.setTempMax(kelvin2celsius(reader.nextDouble()));
             } else {
                reader.skipValue();
             }

@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.net.Uri;
@@ -42,13 +43,14 @@ import android.os.AsyncTask;
 import ml.pho3.tp3.data.City;
 import ml.pho3.tp3.data.WeatherDbHelper;
 import ml.pho3.tp3.webservice.JSONResponseHandler;
+import ml.pho3.tp3.webservice.Updater;
 import ml.pho3.tp3.webservice.WebServiceUrl;
 import ml.pho3.tp3.webservice.Updatable;
 
 public class CityActivity extends Activity {
 
     private static final String TAG = CityActivity.class.getSimpleName();
-    private TextView textCityName, textCountry, textTemperature, textHumdity, textWind, textCloudiness, textLastUpdate, textDescription;
+    private TextView textCityName, textCountry, textTemperature, textHumdity, textWind, textCloudiness, textLastUpdate, textDescription, textPressure;
     private ImageView imageWeatherCondition;
 
     private WeatherDbHelper wd;
@@ -126,6 +128,7 @@ public class CityActivity extends Activity {
         textHumdity = (TextView) findViewById(R.id.editHumidity);
         textWind = (TextView) findViewById(R.id.editWind);
         textCloudiness = (TextView) findViewById(R.id.editCloudiness);
+        textPressure = (TextView) findViewById(R.id.editPressure);
         textLastUpdate = (TextView) findViewById(R.id.editLastUpdate);
         textDescription = (TextView) findViewById(R.id.editDescription);
 
@@ -153,7 +156,7 @@ public class CityActivity extends Activity {
 
         LinearLayout desc = findViewById(R.id.desc);
         Animation aniFade = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fadein);
-        aniFade.setStartOffset(375);
+        aniFade.setStartOffset(400);
         desc.startAnimation(aniFade);
 
         LinearLayout moar = findViewById(R.id.moar);
@@ -205,6 +208,7 @@ public class CityActivity extends Activity {
         textHumdity.setText(fillWith(city.getHumidity())+" %");
         textWind.setText(fillWith(city.getFullWind()));
         textCloudiness.setText(fillWith(city.getCloudiness())+" %");
+        textPressure.setText(fillWith(city.getPressure())+" mb");
         textLastUpdate.setText(fillWith(city.getLastUpdate(),"01/01 00:00"));
 
         String desc = city.getDescription();
@@ -314,74 +318,18 @@ public class CityActivity extends Activity {
 
         @Override
         protected String doInBackground(String... strings) {
-            String name = city.getName();
-            String country = city.getCountry();
-            URL url;
-            try {
-                url = WebServiceUrl.build(name, country);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                Log.e("async", "Bad URL (city / country ?)");
-                return null;
+            Updater u = new Updater(getApplicationContext());
+
+            City c = u.updateCity(city);
+            if(c != null) {
+                city = c;
+                wd.updateCity(city);
+            }
+            else {
+                Log.e("NULL","NUL CITY");
             }
 
-            HttpURLConnection urlConnection = null;
-            try {
-                urlConnection = (HttpURLConnection) url.openConnection();
-            } catch (IOException e) {
-                alertDialog.setTitle(R.string.ComError);
-                alertDialog.setMessage(getString(R.string.conFail));
-
-                Log.e("async", "No internet");
-
-                hasFailed = true;
-
-                e.printStackTrace();
-            }
-
-            try {
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-
-                /*java.util.Scanner s = new java.util.Scanner(in).useDelimiter("\\A");
-                if (s.hasNext()) Log.e("out : ", s.next());
-                else Log.w("out : ", "NULL");*/
-
-                try {
-                    JSONResponseHandler jr = new JSONResponseHandler(city);
-                    jr.readJsonStream(in);
-                } catch (Exception e) {
-                    alertDialog.setTitle(getString(R.string.ComError));
-                    alertDialog.setMessage(getString(R.string.conIOError));
-                    e.printStackTrace();
-                    hasFailed = true;
-                    return null;
-                }
-
-
-            } catch (UnknownHostException e) {
-
-                alertDialog.setTitle(getString(R.string.ComError));
-                alertDialog.setMessage(getString(R.string.noInternet));
-
-                Log.e("async", "No internet");
-
-                hasFailed = true;
-                return null;
-            } catch (IOException e) {
-
-                alertDialog.setTitle(R.string.ComError);
-                alertDialog.setMessage(getString(R.string.conIOError));
-
-                Log.e("async", "No internet");
-
-                hasFailed = true;
-
-                e.printStackTrace();
-            } finally {
-                urlConnection.disconnect();
-            }
-
-            return "Async :D";
+            return "Done";
         }
 
         @Override
